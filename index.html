@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- importação do vue -->
+
+        <!-- vue@2 {O curso do João Ribeiro e em Vue 2}-->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        
+        <!-- <script src="../vue.global.js"></script> -->
+        
+        <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    
+
+    <!-- importação CSS -->
+        <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
+        <!-- *<link rel="stylesheet" type="text/css" href="./style.css" media="screen" /> -->
+        <!-- <link rel="stylesheet" type="text/css" href="./style.css" media="screen" /> -->
+        
+
+
+
+
+
+
+
+</head>
+<body>
+    <div id="root" class="margemDiv">
+        <h2>==> Videoaulas 006 {Diretivas v-model, v-if e v-else} e 007 {methods}</h2>
+        <div>Meu atributo nomes tem: {{ nomes }}</div>
+        <input v-model="nomes"></input>
+        
+        
+        <!-- <div v-if="visivel">
+            <h4>Conteúdo</h4>
+        </div> -->
+
+
+
+
+        <!-- <div v-if="1 == 2">
+            <h4>DIV 1</h4>
+        </div>
+
+        <div v-else>
+            <h4>DIV 2</h4>
+        </div> -->
+
+
+
+
+        
+        <div v-if="visivel" class="margemDiv">
+            <h4>DIV 1 visível</h4>
+        </div>
+
+        <div v-else>
+            <h4>DIV 2 {visível = false}</h4>
+        </div>
+        <button v-on:click="mostrarEsconder()">Chama "mostrarEsconder"</button>
+        <button v-on:click="metodoOutro()">Chama "metodoOutro"</button>
+
+       
+
+        <h2>==> Videoaula 008 {Diretiva v-for}</h2>
+        <p v-for="qualquerAlias in nomes" class="margemP">{{qualquerAlias}}</p>
+        <br>        
+
+        <h3>atributo nome de clientes:</h3>
+        <p v-for="qualquerAlias in clientes" class="margemP">{{qualquerAlias.nome}}</p>
+        <br>
+
+        <h2>clientes:</h2>
+        <p v-for="qualquerAlias in clientes" class="margemP">O Cliente é: {{qualquerAlias.nome}} e tem {{qualquerAlias.idade}} anos.</p>
+        <br>
+        
+        
+
+
+
+
+        <h2>==> Videoaula 009 {Exemplo Prático com Diretivas e Métodos}</h2>
+        <input v-model="novaFruta">
+        <button v-on:click="inserirFruta()">Inserir</button>
+        <p class="margemP">Lista de Frutas: </p>
+        <ul>
+            <li v-for="qualquerAlias in frutas">{{qualquerAlias}}</li>
+        </ul>
+        <p class="margemP">Total: <b>{{ totalFrutas }}</b></p>
+        <br>
+
+
+
+
+
+
+
+
+        <h2>==> Videoaula 010 {Diretivas v-bind e v-on}</h2>
+        <h3>O país selecionado é: {{ pais }}</h3>
+        <!-- <img v-bind:src="imagem"> -->
+        <img :src="imagem">
+        <div>
+            <!-- <button v-on:click="mostrarPortugal">Portugal</button> -->
+            <button @click="mostrarPortugal()">Portugal</button>
+            <button v-on:click="mostrarBrasil()">Brasil</button>
+        </div>
+        <br>
+
+        
+
+
+        
+
+
+
+
+        <h2>==> Videoaula 011 {Diretivas v-html e v-text}</h2>
+        <h3>sem diretivas => estático => entre h1 entre span:</h3>
+        <span><h1>texto exemplo</h1></span>
+        <br>
+
+        <h3>sem diretivas, mas dinamico => entre span:</h3>
+        <span>{{valor}}</span>
+        <br>
+
+        <h3>v-text => dinâmico, mas renderizado como texto => altera o INNER TEXT:</h3>
+        <span v-text="valor"></span>
+        <br>
+
+        <h3>v-html => dinâmico, mas renderizado como HTML => entre h1 ou h3 ou h5:</h3>
+        <span v-html="valor"></span>
+        <div>
+            <button v-on:click="t1">Título 1</button>
+            <button v-on:click="t3">Título 3</button>
+            <button @click="t5">Título 5</button>
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+
+        <h2>==> Videoaula 012 {Diretivas v-once e v-pre}</h2>
+        <h3>v-once:</h3>
+        <p v-once>{{nome}}</p>
+        <h3>double mustache:</h3>
+        <p>{{nome}}</p>
+        <h3>v-pre:</h3>
+        <p v-pre>{{nome}}</p>
+        <h3>v-text:</h3>
+        <p v-text="nome"></p>
+        <button @click="executar">chama executar</button>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+        <h2>==> Videoaula 013 {Diretivas v-show e v-if}</h2>
+        <!-- mantém o parágrafo com todo o conteúdo dentro da DOM. a ocultação é via CSS -->
+        <p v-show="visivel">Primeiro Parágrafo</p>
+        <p>Segundo Parágrafo</p>
+        <!-- comenta o html do parágrafo removendo assim ele do DOM -->
+        <p v-if="visivel">Terceiro Parágrafo</p>
+        <button @click="mostrarEsconder()">chama mostrarEsconder</button>
+        <br>
+        <br>
+        <p v-show="visivel">Primeiro Parágrafo</p>
+        <p>Segundo Parágrafo</p>
+        <p v-if="visivel">Terceiro Parágrafo</p>
+        <button @click="mostrarEsconder()">chama mostrarEsconder</button>
+
+
+
+
+          
+        <input v-model="novoNome">
+        <div>
+            <button @click="adicionarAnomes2">Adicionar a nomes2</button>
+        </div>
+        <hr>
+        <ul>
+            <li v-for="nome in nomes2">{{nome | capitalizar}}</li>
+        </ul>
+
+
+
+        <br>
+        <p>O meu nome é: {{nomeCompletoM()}}</p>
+        <p>O meu nome é: {{nomeCompletoC}}</p>
+        <div>
+            <input v-model="nome">
+        </div>
+        
+
+
+        <br>
+        <!-- <novo></novo> -->
+        <!-- <novo /> -->
+
+
+        <br>
+        <!-- <component-pai /> -->
+
+
+        <hr>
+        <!-- <lista-nomes v-bind:nomescomponent = 'nomes' /> -->
+        <lista-nomes :nomescomponent = 'nomes'></lista-nomes>
+
+
+        <br>
+        <p>{{nomes3}}</p>
+        <button @click="definirNomes3">DefinirNomes3</button>
+        <button @click="destruirInstanciaVue">Destruir Instância Vue</button>
+
+        
+
+
+    </div>
+
+    <script>
+        // exemplo de component
+        // Vue.component('novo', {
+        //     template: `
+        //     <div>
+        //         <div>Olá Mundo!</div>
+        //         <div>Olá Mundo Denovo!</div>
+        //     </div>
+        //     `
+        // });
+
+
+
+        // // exemplo de component pai e filho
+        // Vue.component('component-pai', {
+        //     template: `
+        //     <div>
+        //         <p>Este é o texto do component-pai</p>
+        //         <component-filho />
+        //     </div>
+        //     `
+        // });
+
+        // Vue.component('component-filho', {
+        //     template: `
+        //     <div>
+        //         <p>Este é o texto do component-filho</p>
+        //     </div>
+        //     `
+        // });
+
+
+
+        Vue.component('lista-nomes', {
+            props: [
+                'nomescomponent'
+            ],
+            template: `
+            <ul>
+                <li v-for="nome in nomescomponent">{{nome}}</li>
+            </ul>
+            `
+        });
+
+        let root = new Vue({
+            el: "#root",
+            data: {
+                nomes: [
+                    "João Ribeiro",
+                    "Ana",
+                    "Carlos Gardel",
+                    "Antonio",
+                    "Sandra Bullock",
+                ],
+                nomes2: [],
+                nomes3: '',
+                clientes: [
+                    {nome: "Ivan", idade: 39},
+                    {nome: "Pedro", idade: 40},
+                    {nome: "Paulo", idade: 66},
+                    {nome: "Napoleão", idade: 35},
+                ],
+                visivel: false,
+                frutas: [],
+                novaFruta: '',
+                totalFrutas: 0,
+                pais: '',
+                imagem: '',
+                valor: '<h1>texto exemplo</h1>',
+                nome: 'Antônio',
+                novoNome: '',
+                apelido: 'Ribeiro',
+            },
+            created: function() {
+                console.log('Criada = created');
+            },
+            mounted: function() {
+                console.log('Montada = mounted');
+            },
+            updated: function() {
+                console.log('Atualizada = updated');
+            },
+            destroyed: function() {
+                console.log('Destruída = destroyed');
+            },
+            methods: {
+                mostrarEsconder: function() {
+                    this.visivel = !this.visivel;
+                    console.log(this.visivel);
+                },
+                metodoOutro: function() {
+                    console.log("metodoOutro")
+                },
+                inserirFruta: function() {
+                    this.frutas.push(this.novaFruta);
+                    this.novaFruta='';
+                    this.totalFrutas = this.frutas.length;
+                },
+                mostrarPortugal: function() {
+                    this.pais="Portugal";
+                    this.imagem="images/bandeira de Portugal.png";
+                },
+                mostrarBrasil: function() {
+                    this.pais="Brasil";
+                    this.imagem="images/bandeira do Brasil.png";
+                },
+                t1: function() {
+                    this.valor = '<h1>texto exemplo</h1>';
+                },
+
+                t3: function() {
+                    this.valor = '<h3>texto exemplo</h3>';
+                },
+
+                t5: function() {
+                    this.valor = '<h5>texto exemplo</h5>';
+                },
+
+                executar: function() {
+                    this.nome = "Ubirajara";
+                },
+
+                adicionarAnomes2: function() {
+                    this.nomes2.push(this.novoNome);
+                    this.novoNome = '';
+                },
+
+                nomeCompletoM: function() {
+                    return this.nome + " " + this.apelido;
+                },
+
+                definirNomes3: function() {
+                    this.nomes3 = 'João Terceiro';
+                },
+
+                destruirInstanciaVue: function() {
+                    root.$destroy();
+                },
+            },
+
+            computed: {
+                nomeCompletoC: function() {
+                    return this.nome + " " + this.apelido;
+                }
+            },
+
+            filters: {
+                capitalizar: function(value) {   
+                    return value.toUpperCase();     
+                }
+            },
+
+            component: [
+                'novo',
+                'component-pai',
+                'component-filho',
+            ],
+        });
+
+        root.mostrarBrasil();
+    </script>
+    
+</body>
+</html>
